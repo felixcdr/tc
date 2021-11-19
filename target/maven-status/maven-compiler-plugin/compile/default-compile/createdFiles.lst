@@ -1,7 +1,7 @@
 es/upm/dit/apsv/traceconsumer2/Traceconsumer2Application.class
 es/upm/dit/apsv/traceconsumer2/repository/TransportationOrderRepository.class
-es/upm/dit/apsv/traceconsumer2/repository/TraceRepository.class
 es/upm/dit/apsv/traceconsumer2/model/Trace.class
+es/upm/dit/apsv/traceconsumer2/repository/TraceRepository.class
 es/upm/dit/apsv/traceconsumer2/model/TransportationOrder.class
 es/upm/dit/apsv/traceconsumer2/controller/TraceController.class
 es/upm/dit/apsv/traceconsumer2/controller/TransportationOrderController.class

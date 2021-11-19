@@ -40,18 +40,7 @@ public class Traceconsumer2Application {
 			t.setTraceId(t.getTruck() + t.getLastSeen());
 			traceRepository.save(t);
 			TransportationOrder result = transportationOrderRepository.findById(t.getTruck()).orElse(new TransportationOrder());
-			/*
-			String uri = env.getProperty("orders.server");
-			RestTemplate restTemplate = new RestTemplate();
-			TransportationOrder result = null;
-			try {			
-			  result = restTemplate.getForObject(uri
-                           + t.getTruck(), TransportationOrder.class);
-			} catch (HttpClientErrorException.NotFound ex)   {
-				result = null;
-			}
-			if (result != null && result.getSt() == 0) {
-				*/
+			
 			if (result != null && result.getTruck()!= null && ! result.getTruck().equals("") && result.getSt() == 0) {
 				result.setLastDate(t.getLastSeen());
 				result.setLastLat(t.getLat());
