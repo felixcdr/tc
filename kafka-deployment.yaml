@@ -27,9 +27,11 @@ kind: Deployment
 apiVersion: apps/v1
 metadata:
   name: zookeeper-deployment
+  labels: 
+    app: zookeeper
 spec:
   replicas: 1
-   selector:
+  selector:
     matchLabels:
       app: zookeeper
   template:
@@ -61,7 +63,7 @@ metadata:
     app: kafka-broker
 spec:
   replicas: 1
-   selector:
+  selector:
     matchLabels:
       app: kafka-broker
   template:
@@ -97,7 +99,7 @@ metadata:
     app: kafka-cat
 spec:
   replicas: 1
-   selector:
+  selector:
     matchLabels:
       app: kafka-cat
   template:
