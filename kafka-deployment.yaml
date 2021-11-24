@@ -60,17 +60,16 @@ apiVersion: apps/v1
 metadata:
   name: kafka-broker
   labels:
-    app: kafka-broker
+    app: kafka
 spec:
   replicas: 1
   selector:
     matchLabels:
-      app: kafka-broker
+      app: kafka
   template:
     metadata:
       labels:
         app: kafka
-        id: "0"
     spec:
       containers:
         - name: kafka
