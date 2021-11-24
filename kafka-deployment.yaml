@@ -34,7 +34,7 @@ spec:
     id: "0"
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: zookeeper-deployment
 spec:
@@ -60,7 +60,7 @@ spec:
               
 ---
 kind: Deployment
-apiVersion: v1
+apiVersion: apps/v1
 metadata:
   name: kafka-broker
 spec:
@@ -90,7 +90,7 @@ spec:
               value: PLAINTEXT:PLAINTEXT,PLAINTEXT_HOST:PLAINTEXT
 ---
 kind: Deployment
-apiVersion: extensions/v1beta1
+apiVersion: apps/v1
 metadata:
   name: kafka-cat
 spec:
