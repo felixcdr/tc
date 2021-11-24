@@ -1,7 +1,7 @@
 # CI File for the OrderManager microservice project
 stages:
   - build
- # - test
+  - test
   - upload
  
 variables:
@@ -11,11 +11,11 @@ variables:
 include:
   - template: Code-Quality.gitlab-ci.yml
 
-code_quality:
-  variables:
-    REPORT_FORMAT: html
-  artifacts:
-    paths: [gl-code-quality-report.html]
+#code_quality:
+#  variables:
+#    REPORT_FORMAT: html
+#  artifacts:
+#    paths: [gl-code-quality-report.html]
 
 # This template uses jdk11 for verifying and deploying images
 image: maven:3.8-jdk-11
