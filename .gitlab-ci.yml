@@ -62,10 +62,11 @@ deploy-to-gke:
   script:
     - kubectl create secret docker-registry gitlab-registry --docker-server="$CI_REGISTRY" --docker-username="$CI_DEPLOY_USER" --docker-password="$CI_DEPLOY_PASSWORD" --docker-email="$GITLAB_USER_EMAIL" -o yaml --dry-run=client | kubectl apply -f -
     - kubectl create namespace kafka
-    - kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
+ #   - kubectl create -f 'https://strimzi.io/install/latest?namespace=kafka' -n kafka
     # Apply the `Kafka` Cluster CR file
-    - kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-persistent-single.yaml -n kafka 
-    - kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka 
+ #   - kubectl apply -f https://strimzi.io/examples/latest/kafka/kafka-persistent-single.yaml -n kafka 
+ #   - kubectl wait kafka/my-cluster --for=condition=Ready --timeout=300s -n kafka 
+    - kubectl apply -f kafka-deployment.yaml
     - kubectl apply -f deployment.yaml
     - kubectl get deployments
     - kubectl get pods
