@@ -34,3 +34,46 @@ spec:
         - containerPort: 8080
       imagePullSecrets:
        - name: gitlab-registry
+      env:
+        - name: spring.cloud.stream.kafka.binder.brokers
+          value: "kafka-service:9092"
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: traceproducer-srv
+spec:
+  selector:
+    app: traceproducer
+  ports:
+  - protocol: TCP
+    port: 80
+    targetPort: 8080
+  type: LoadBalancer
+---
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: traceproducer-dpl
+  labels:
+    app: traceproducer
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: traceproducer
+  template:
+    metadata:
+      labels:
+        app: traceproducer
+    spec:
+      containers:
+      - name: traceproducer
+        image: registry.gitlab.com/p3216/traceproducer
+        ports:
+        - containerPort: 8080
+      imagePullSecrets:
+       - name: gitlab-registry
+      env:
+        - name: spring.cloud.stream.kafka.binder.brokers
+          value: "kafka-service:9092"
