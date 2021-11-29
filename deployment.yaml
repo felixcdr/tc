@@ -36,7 +36,7 @@ spec:
        - name: gitlab-registry
       env:
         - name: spring.cloud.stream.kafka.binder.brokers
-          value: "kafka-service:9092"
+          value: "${KAFKA_SERVICE_SERVICE_HOST}:9092"
 ---
 apiVersion: v1
 kind: Service
@@ -76,4 +76,4 @@ spec:
        - name: gitlab-registry
       env:
         - name: spring.cloud.stream.kafka.binder.brokers
-          value: "kafka-service:9092"
+          value: "${KAFKA_SERVICE_SERVICE_HOST}:9092"
