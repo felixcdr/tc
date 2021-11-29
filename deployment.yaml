@@ -32,9 +32,7 @@ spec:
         image: registry.gitlab.com/p3216/traceconsumer2
         ports:
         - containerPort: 8080
-      imagePullSecrets:
-       - name: gitlab-registry
-      env:
+        env:
         - name: spring.cloud.stream.kafka.binder.brokers
           value: "${KAFKA_SERVICE_SERVICE_HOST}:9092"
 ---
@@ -72,8 +70,9 @@ spec:
         image: registry.gitlab.com/p3216/traceproducer
         ports:
         - containerPort: 8080
-      imagePullSecrets:
-       - name: gitlab-registry
-      env:
+        env:
         - name: spring.cloud.stream.kafka.binder.brokers
           value: "${KAFKA_SERVICE_SERVICE_HOST}:9092"
+      imagePullSecrets:
+       - name: gitlab-registry
+
