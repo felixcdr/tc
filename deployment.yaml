@@ -35,6 +35,8 @@ spec:
         env:
         - name: spring.cloud.stream.kafka.binder.brokers
           value: "${KAFKA_SERVICE_SERVICE_HOST}:9092"
+      imagePullSecrets:
+      - name: gitlab-registry
 ---
 apiVersion: v1
 kind: Service
