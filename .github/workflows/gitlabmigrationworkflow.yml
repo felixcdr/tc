@@ -1,0 +1,45 @@
+name: Gitlab CI migration
+on: [push]
+env:
+  MAVEN_OPTS: "-Dhttps.protocols=TLSv1.2 -Dmaven.repo.local=$CI_PROJECT_DIR/.m2/repository -Dorg.slf4j.simpleLogger.log.org.apache.maven.cli.transfer.Slf4jMavenTransferListener=WARN -Dorg.slf4j.simpleLogger.showDateTime=true -Djava.awt.headless=true"
+  MAVEN_CLI_OPTS: "--batch-mode --errors --fail-at-end --show-version -DinstallAtEnd=true -DdeployAtEnd=true"
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 14
+      uses: actions/setup-java@v1
+      with:
+        java-version: 14
+    - name: Build project with Maven
+      run: mvn -B compile --file pom.xml
+  verify-and-package:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: Set up JDK 14
+      uses: actions/setup-java@v1
+      with:
+        java-version: 14
+    - name: Run all defined tests and generate war with Maven
+      run: mvn -B verify --file pom.xml
+    - uses: actions/cache@v3
+      with:
+        key: java-microservice
+        path: ~/target/traceconsumer-0.0.1-SNAPSHOT.jar
+  upload:
+    needs: verify-and-package
+    runs-on: ubuntu-latest
+    steps:
+      - name: "Build:checkout"
+        uses: actions/checkout@v2
+      - name: 'Build:dockerimage'
+        uses: docker/build-push-action@v1
+        with:
+          registry: ghcr.io
+          username: "felixcdr"
+          password: ${{ secrets.PAT }}
+          repository: felixcdr/tc
+          tags: latest
