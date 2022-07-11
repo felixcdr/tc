@@ -25,10 +25,12 @@ jobs:
         java-version: 14
     - name: Run all defined tests and generate war with Maven
       run: mvn -B verify --file pom.xml
+    - run: mkdir /target
+    - run: cp ~/target/traceconsumer-0.0.1-SNAPSHOT.jar /target
     - uses: actions/cache@v3
       with:
         key: java-microservice
-        path: ~/target/traceconsumer-0.0.1-SNAPSHOT.jar
+        path: /target/traceconsumer-0.0.1-SNAPSHOT.jar
   upload:
     needs: verify-and-package
     runs-on: ubuntu-latest
