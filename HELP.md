@@ -1,4 +1,4 @@
-# Getting Started
+# TC project on Github
 
 ### Reference Documentation
 For further reference, please consider the following sections:
