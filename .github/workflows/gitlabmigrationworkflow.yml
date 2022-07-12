@@ -35,6 +35,7 @@ jobs:
     steps:
       - name: "Build:checkout"
         uses: actions/checkout@v2
+      - run: ls ${GITHUB_WORKSPACE}/target/*.jar
       - name: 'Build:dockerimage'
         uses: docker/build-push-action@v1
         with:
