@@ -28,7 +28,7 @@ jobs:
     - uses: actions/cache@v3
       with:
         key: java-microservice
-        path: $GITHUB_WORKSPACE/target/traceconsumer-0.0.1-SNAPSHOT.jar
+        path: $GITHUB_WORKSPACE/target/traceconsumer2-0.0.1-SNAPSHOT.jar
   upload:
     needs: verify-and-package
     runs-on: ubuntu-latest
