@@ -29,6 +29,7 @@ jobs:
       with:
         key: java-microservice
         path: $GITHUB_WORKSPACE/target/traceconsumer2-0.0.1-SNAPSHOT.jar
+    - run: ls ${GITHUB_WORKSPACE}/target/*.jar
   upload:
     needs: verify-and-package
     runs-on: ubuntu-latest
