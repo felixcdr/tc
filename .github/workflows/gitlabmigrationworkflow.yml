@@ -26,11 +26,19 @@ jobs:
     - name: Run all defined tests and generate war with Maven
       run: mvn -B verify --file pom.xml
     - run: ls ${GITHUB_WORKSPACE}/target/*.jar
-    - name: 'Build:dockerimage'
-      uses: docker/build-push-action@v2
-      with:
+     -
+        name: Login to GHCR.IO
+        uses: docker/login-action@v2
+        with:
           registry: ghcr.io
-          username: "felixcdr"
-          password: ${{ secrets.PAT }}
-          repository: felixcdr/tc
-          tags: latest
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+      -
+        name: Build and push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: user/app:latest
+    
+   
