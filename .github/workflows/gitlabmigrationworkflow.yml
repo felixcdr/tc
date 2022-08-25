@@ -39,6 +39,6 @@ jobs:
         with:
           context: .
           push: true
-          tags: gchr.io/felixcdr/tc:latest
+          tags: ghcr.io/felixcdr/tc:latest
     
    
